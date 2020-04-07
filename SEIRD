@@ -1,0 +1,479 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Mar 31 15:15:39 2020
+
+@author: pedroc
+"""
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 18 17:26:15 2020
+
+@author: pedroc
+"""
+import numpy as np
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt 
+from scipy.optimize import curve_fit, fsolve
+import pandas as pd
+from sklearn.metrics import r2_score
+from mpl_toolkits import mplot3d
+
+
+def Coronamax(x,t):
+    S = x[0]
+    E = x[1]
+    I = x[2]
+    R = x[3]
+    M = x[4]
+    b = 0.7*0.00000027/(1+0.01*np.exp(t-30)) + 0.3*0.00000027
+    a = 0.0320
+    mu = 0.0159
+    c = 1/5.3
+    k = b*0.55
+    dSdt = -b*I*S - k*E*S
+    dEdt = b*I*S - c*E + k*E*S
+    dIdt = c*E - a*I - mu*I
+    dRdt = a*I
+    dMdt = mu*I
+    return [dSdt, dEdt, dIdt, dRdt, dMdt]
+
+N = 1e6
+E0 = 0
+I0 = 350
+
+#DEFININDO AS CONDIÇÕES INICIAIS, O TEMPO DE DURAÇÃO E A FUNÇÃO ODEINT INTEGRA AS EDOS PARA OBTER A SOLUÇÃO
+
+x0 = [N,E0,I0,0,0]
+t = x
+t2 = np.linspace(1, 200, 2000)
+y = odeint(Coronamax, x0, t2)
+
+Smax = y[:,0]
+Emax = y[:,1]
+Imax = y[:,2]
+Rmax = y[:,3]
+Mmax = y[:,4]
+CTmax = Mmax + Rmax + Imax
+
+
+
+def Coronamax2(x,t):
+    S = x[0]
+    E = x[1]
+    I = x[2]
+    R = x[3]
+    M = x[4]
+    b = 0.6*0.00000027/(1+0.01*np.exp(t-30)) + 0.4*0.00000027
+    a = 0.0320
+    mu = 0.0159
+    c = 1/5.3
+    k = b*0.55
+    dSdt = -b*I*S - k*E*S
+    dEdt = b*I*S - c*E + k*E*S
+    dIdt = c*E - a*I - mu*I
+    dRdt = a*I
+    dMdt = mu*I
+    return [dSdt, dEdt, dIdt, dRdt, dMdt]
+
+N = 1e6
+E0 = 0
+I0 = 350
+
+#DEFININDO AS CONDIÇÕES INICIAIS, O TEMPO DE DURAÇÃO E A FUNÇÃO ODEINT INTEGRA AS EDOS PARA OBTER A SOLUÇÃO
+
+x0 = [N,E0,I0,0,0]
+t = x
+t2 = np.linspace(1, 200, 2000)
+y = odeint(Coronamax2, x0, t2)
+
+Smax2 = y[:,0]
+Emax2 = y[:,1]
+Imax2 = y[:,2]
+Rmax2 = y[:,3]
+Mmax2 = y[:,4]
+CTmax2 = Mmax2 + Rmax2 + Imax2
+
+
+
+def Coronamax3(x,t):
+    S = x[0]
+    E = x[1]
+    I = x[2]
+    R = x[3]
+    M = x[4]
+    b = 0.3*0.00000027/(1+0.01*np.exp(t-30)) + 0.7*0.00000027
+    a = 0.0320
+    mu = 0.0159
+    c = 1/5.3
+    k = b*0.55
+    dSdt = -b*I*S - k*E*S
+    dEdt = b*I*S - c*E + k*E*S
+    dIdt = c*E - a*I - mu*I
+    dRdt = a*I
+    dMdt = mu*I
+    return [dSdt, dEdt, dIdt, dRdt, dMdt]
+
+N = 1e6
+E0 = 0
+I0 = 350
+
+#DEFININDO AS CONDIÇÕES INICIAIS, O TEMPO DE DURAÇÃO E A FUNÇÃO ODEINT INTEGRA AS EDOS PARA OBTER A SOLUÇÃO
+
+x0 = [N,E0,I0,0,0]
+t = x
+t2 = np.linspace(1, 200, 2000)
+y = odeint(Coronamax3, x0, t2)
+
+Smax3 = y[:,0]
+Emax3 = y[:,1]
+Imax3 = y[:,2]
+Rmax3 = y[:,3]
+Mmax3 = y[:,4]
+CTmax3 = Mmax3 + Rmax3 + Imax3
+
+
+
+def Coronamax4(x,t):
+    S = x[0]
+    E = x[1]
+    I = x[2]
+    R = x[3]
+    M = x[4]
+    b = 0.6*0.00000027/(1+0.001*np.exp(t-30)) + 0.4*0.00000027
+    a = 0.0320
+    mu = 0.0159
+    c = 1/5.3
+    k = b*0.55
+    dSdt = -b*I*S - k*E*S
+    dEdt = b*I*S - c*E + k*E*S
+    dIdt = c*E - a*I - mu*I
+    dRdt = a*I
+    dMdt = mu*I
+    return [dSdt, dEdt, dIdt, dRdt, dMdt]
+
+N = 1e6
+E0 = 0
+I0 = 350
+
+#DEFININDO AS CONDIÇÕES INICIAIS, O TEMPO DE DURAÇÃO E A FUNÇÃO ODEINT INTEGRA AS EDOS PARA OBTER A SOLUÇÃO
+
+x0 = [N,E0,I0,0,0]
+t = x
+t2 = np.linspace(1, 200, 2000)
+y = odeint(Coronamax4, x0, t2)
+
+Smax4 = y[:,0]
+Emax4 = y[:,1]
+Imax4 = y[:,2]
+Rmax4 = y[:,3]
+Mmax4 = y[:,4]
+CTmax4 = Mmax4 + Rmax4 + Imax4
+
+
+
+def Coronamax5(x,t):
+    S = x[0]
+    E = x[1]
+    I = x[2]
+    R = x[3]
+    M = x[4]
+    b = 0.00000027
+    a = 0.0320
+    mu = 0.0159
+    c = 1/5.3
+    k = b*0.55
+    dSdt = -b*I*S - k*E*S
+    dEdt = b*I*S - c*E + k*E*S
+    dIdt = c*E - a*I - mu*I
+    dRdt = a*I
+    dMdt = mu*I
+    return [dSdt, dEdt, dIdt, dRdt, dMdt]
+
+N = 1e6
+E0 = 0
+I0 = 350
+
+#DEFININDO AS CONDIÇÕES INICIAIS, O TEMPO DE DURAÇÃO E A FUNÇÃO ODEINT INTEGRA AS EDOS PARA OBTER A SOLUÇÃO
+
+x0 = [N,E0,I0,0,0]
+t = x
+t2 = np.linspace(1, 200, 2000)
+y = odeint(Coronamax5, x0, t2)
+
+Smax5 = y[:,0]
+Emax5 = y[:,1]
+Imax5 = y[:,2]
+Rmax5 = y[:,3]
+Mmax5 = y[:,4]
+CTmax5 = Mmax5 + Rmax5 + Imax5
+
+#plt.rc('text', usetex = True)
+#plt.rc('font', family ='serif')
+#b = 0.7*0.000000525/(1+0.01*np.exp(t2-30)) + 0.3*0.000000525
+#plt.plot(t2, b)
+#plt.vlines(30, 0, 0.000000625)
+#plt.xlim(0,50)
+#plt.text(5, 0.9*0.000000525, r'$\beta(t<t_{c})$', size = 12)
+#plt.text(40, 0.2*0.000000525, r'$\beta(t>t_{c})$', size = 12)
+#plt.text(23, 0.1*0.000000525, r'$t = t_c \Rightarrow$', size = 12)
+
+def Coronamin(x,t):
+    S = x[0]
+    E = x[1]
+    I = x[2]
+    R = x[3]
+    M = x[4]
+    b = 0.7*0.00000260/(1+0.01*np.exp(t-30)) + 0.3*0.00000260
+    a = 0.0320
+    mu = 0.0159
+    c = 1/5.3
+    k = b*0.55
+    dSdt = -b*I*S - k*E*S
+    dEdt = b*I*S - c*E + k*E*S
+    dIdt = c*E - a*I - mu*I
+    dRdt = a*I
+    dMdt = mu*I
+    return [dSdt, dEdt, dIdt, dRdt, dMdt]
+
+N = 150000
+E0 = 0
+I0 = 70
+
+#DEFININDO AS CONDIÇÕES INICIAIS, O TEMPO DE DURAÇÃO E A FUNÇÃO ODEINT INTEGRA AS EDOS PARA OBTER A SOLUÇÃO
+
+x0 = [N,E0,I0,0,0]
+t = x
+t2 = np.linspace(1, 200, 2000)
+y = odeint(Coronamin, x0, t2)
+
+Smin = y[:,0]
+Emin = y[:,1]
+Imin = y[:,2]
+Rmin = y[:,3]
+Mmin = y[:,4]
+CTmin = Mmin + Rmin + Imin
+
+yerrormax = 0.5*i.values.ravel()
+yerrormin = 0*i.values.ravel()
+yerror = [yerrormin, yerrormax]
+plt.rc('text', usetex = True)
+plt.rc('font', family ='serif')
+plt.plot(t2, Imin, label = 'Infected with 70\% efficiency', color = 'orange')
+plt.plot(t2, Imax, color = 'orange')
+plt.plot(t2, Imax2, color = 'green', label = r'Infected with 60\% efficiency')
+plt.plot(t2, Imax3, color = 'blue', label = r'Infected with 30\% efficiency')
+plt.plot(t2, Imax4, color = 'magenta', label = r'Infected with 70\% efficiency and 10x slower')
+plt.plot(t2, Imax5, color = 'brown', label = r'Infected with no quarantine')
+#plt.plot(t2, 0.08*Imin, label = 'Critical cases on Spain', color = 'red')
+#plt.plot(t2, 0.08*Imax, color = 'red')
+#plt.plot(x, Imin, label = 'Modelo para infecções', color = 'purple', linewidth = 2)
+#plt.plot(x, Imax, label = 'Modelo para infecções', color = 'purple', linewidth = 2)
+plt.fill_between(t2, Imin, Imax, where=Imax >= Imin, alpha = 0.3, facecolor = 'orange')
+#plt.fill_between(t2, 0.08*Imin, 0.08*Imax, alpha = 0.3, facecolor = 'red')
+plt.fill_between(t2, Imax, Imax2, where=Imax2 >= Imax, alpha = 0.3, facecolor = 'green')
+plt.fill_between(t2, Imax2, Imax4, where=Imax4 >= Imax2, alpha = 0.3, facecolor = 'magenta')
+plt.fill_between(t2, Imax4, Imax3, where=Imax3 >= Imax4, alpha = 0.3, facecolor = 'blue')
+plt.fill_between(t2, Imax3, Imax5, where=Imax5 >= Imax3, alpha = 0.3, facecolor = 'brown')
+#plt.hlines(1202, 0, 200, linestyle = 'dashed', color = 'black', label = 'ICU beds Lombardy')
+#plt.hlines(2043, 0, 200, linestyle = 'dashed', color = 'green', label = 'Italys plan for ICU beds')
+plt.plot(x, i.values.ravel(),'m.', label = 'Spain data')
+plt.xlabel('Days since 15/02')
+plt.ylabel('Number of people')
+lgd = plt.legend(bbox_to_anchor=(0.15, -0.15), loc='upper left', borderaxespad=0.)
+plt.errorbar(t, i.values.ravel(), yerr = yerror, capsize = 2)
+#plt.xlim(35,40)
+#print('R^2: ', r2_score(Imin, i))
+#print('R^2: ', r2_score(Imax, i))
+#plt.savefig(r"/home/pedroc/Documentos/pedro/Coronavirus/SpainprevisaoCENÁRIOS03-04.pdf", bbox_extra_artists=[lgd], bbox_inches='tight')
+
+
+plt.plot(x, ct.values.ravel(),'b.', label = 'Casos totais Itália')
+plt.plot(x, CT, label = 'Modelo para casos totais', color = 'orange', linewidth = 2)
+plt.legend(fontsize = 8)
+plt.xlabel('Dias decorridos')
+plt.ylabel('Numero de pessoas')
+print('R^2: ', r2_score(CT, ct))
+
+plt.plot(x, m.values.ravel(), 'r.', label = 'Mortos Itália')
+plt.plot(x, M, label = 'Modelo para mortes', color = 'blue', linewidth = 2)
+plt.legend(fontsize = 9)
+plt.xlabel('Dias decorridos')
+plt.ylabel('Numero de pessoas')
+print('R^2: ', r2_score(M, m))
+
+plt.plot(x, r.values.ravel(), 'g.', label = 'Recuperados Itália')
+plt.plot(x, R, label = 'Modelo para recuperações', color = 'black', linewidth = 2)
+plt.legend(fontsize = 9)
+plt.xlabel('Dias decorridos')
+plt.ylabel('Numero de pessoas')
+print('R^2: ', r2_score(R, r))
+
+
+#PLOTANDO OS GRÁFICOS
+
+r0 = 0.01
+b0 = 0.03
+a0 = 2
+mu20 = 0
+
+for i in range(6):
+    def Corona(x,t):
+        S = x[0]
+        I = x[1]
+        R = x[2]
+        M = x[3]
+        delta = 0.01
+        r = r0 + delta*i
+        b = b0 + delta*i
+        a = a0 + delta*i
+        mu2 = mu20 + delta*i
+        N = 1000000
+#    mu1 = 0.03
+#    mu3 = 0.02
+        dSdt = -r*b*I*S #- mu1*S + mu3*S
+        dIdt = r*b*I*S - a*I - mu2*I #- mu1*I
+        dRdt = a*I #- mu1*R
+        dMdt = mu2*I
+        R = N - S - I - M
+        S = N - I
+    
+        return [dSdt, dIdt, dRdt, dMdt]
+    N = 10000
+    I0 = 100
+    x0 = [N,I0,0,0]
+    t = np.linspace(0, 60, 100000)
+    x = odeint(Corona, x0, t)
+    S = x[:,0]
+    I = x[:,1]
+    I2 = -S + I0 + N
+    plt.plot(S, I)
+    plt.xlabel('Susceptíveis')
+    plt.ylabel('Infectados')
+    i = i + 1
+
+
+plt.plot(S, I2, color = 'black')
+plt.rc('text', usetex = True)
+plt.rc('font', family ='serif')
+plt.text(6000,8000, r'$I_{max} \Rightarrow S = \frac{\alpha + \mu}{k}$', size = 14)
+plt.text(1100,9000, r'$\Leftarrow \alpha = \mu = 0$', size = 14)
+
+
+#PLOTANDO OS GRÁFICOS DE I, R, M EM FUNÇÃO DO TEMPO
+#plt.plot(t, S, label = 'Vulneráveis')
+plt.plot(t2, I, label = 'Infectados', color = 'orange')
+plt.plot(t2, R, label = 'Recuperados', color = 'green')
+plt.ylabel('Numero de pessoas')
+plt.xlabel('Dias passado desde o início da doença')
+plt.plot(t2, M, label = 'Mortos', color = 'red')
+plt.plot(t2, CT, label = 'Casos totais', color = 'blue')
+plt.legend(loc = 'best')
+
+#IMPORTANTO OS DADOS DA ESPANHA
+
+i = pd.read_csv("/home/pedroc/Documentos/pedro/Coronavirus/EspanhaInfectados2.txt")
+m = pd.read_csv("/home/pedroc/Documentos/pedro/Coronavirus/EspanhaMortos.txt")
+ct = pd.read_csv("/home/pedroc/Documentos/pedro/Coronavirus/EspanhaCasosTotais.txt")
+r = ct.values.ravel()-i.values.ravel()-m.values.ravel()
+i.head()
+m.head()
+x = np.linspace(1, 39, 39)
+plt.plot(x, i, 'mv', label = 'Infected')
+plt.plot(x, m, 'r*', label = 'Dead')
+plt.plot(x, r, 'gd', label = 'Recovered')
+plt.plot(x, ct, 'b.', label = 'Total registered cases')
+plt.legend(loc = 'best', fontsize = 10)
+#plt.xlim(0,35)
+plt.xlabel('Days since 15/02/2020')
+plt.ylabel('Number of people')
+#plt.savefig(r"/home/pedroc/Documentos/pedro/Coronavirus/COVID19Italia.pdf")
+
+#AJUSTE EXPONENCIAL ESPANHA
+
+#x = np.arange(0, 35, 1)
+#xr = np.arange(0, 34, 1)
+
+def exp(x, a, b):
+    return a*np.exp(b*x)
+
+c, cov = curve_fit(exp, x.values.ravel(), i.values.ravel())
+
+expopt = exp(x, c[0], c[1])
+
+def exp2(x, a2, b2):
+    return a2*np.exp(b2*x)
+
+c2, cov = curve_fit(exp, x.values.ravel(), ct.values.ravel())
+
+expopt2 = exp2(x, c2[0], c2[1])
+plt.rc('text', usetex = True)
+plt.rc('font', family ='serif')
+plt.plot(x, expopt2, color = 'red', label = r'Exponential growth for deaths')
+plt.plot(x, ct.values.ravel(),'k.', label = 'Deaths')
+plt.plot(x, expopt, color = 'blue', label = r'Exponential growth for recoveries')
+plt.plot(x, i.values.ravel(),'b.', label = 'Recoveries')
+plt.legend(loc = 'best')
+plt.xlabel('Days since 15/02/2020')
+plt.ylabel('Number of people')
+#plt.savefig(r"/home/pedroc/Documentos/pedro/Coronavirus/exponetialItaliaDeadRecov.pdf")
+
+#AJUSTE LINEAR RAZÃO DE MORTES E RECUPERADOS ITÁLIA
+
+w = np.linspace(0, 27000, 48)
+def linear(w, a, b):
+    return a*w + b
+
+c3, cov = curve_fit(linear, r, m.values.ravel())
+
+linearopt = linear(w, c3[0], c3[1])
+
+print('R^2: ', r2_score(linearopt, m))
+
+plt.rc('text', usetex = True)
+plt.rc('font', family ='serif')
+plt.plot(w, linearopt,'b-', label = r'Ajuste $Ax+B$')
+plt.plot(r, m.values.ravel(),'r.', label = 'Dados Itália')
+plt.legend(loc = 'best')
+plt.xlabel('Numero de pessoas recuperadas')
+plt.ylabel('Numero de pessoas mortas')
+
+#PLOTANDO I EM FUNÇÃO DE M E R
+
+def I(m, rc):
+    R0 = 1.5
+    mu = 0.04
+    k = 0.0001
+    a = 0.03
+    A = -k/(mu*(1-mu/a))
+    B = -k/(a*(1-a/mu))
+    N = 10000
+    I0 = 100
+    return N - (N - I0)*np.exp(-A*rc - B*m) + rc - m
+
+m = np.linspace(0, 1000, 1000)
+rc = np.linspace(0, 1000, 1000)
+
+m1, rc1 = np.meshgrid(m, rc)
+
+for i in range(5):
+    delta = 10
+    delta = delta*i
+    plt.plot(m, I(m, delta*i), label = 'recuperados =  %.2f' %delta)
+    plt.ylim(0,8000)
+    i = i + 1
+plt.legend()
+plt.xlabel('Mortes')
+plt.ylabel('Infectados')
+
+for i in range(5):
+    delta = 10
+    delta = delta*i
+    plt.plot(rc, I(delta*i, rc), label = 'mortos =  %.2f' %delta)
+    plt.ylim(0,15000)
+    i = i + 1
+plt.legend()
+plt.xlabel('Recuperados')
+plt.ylabel('Infectados')
